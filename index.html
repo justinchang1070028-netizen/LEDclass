@@ -35,15 +35,6 @@
   }
   body.modal-open { overflow: hidden; }
 
-  header { text-align: center; padding: 36px 16px 4px; }
-  header .deco { font-size: 2rem; letter-spacing: .4em; animation: bob 2.4s ease-in-out infinite; display: inline-block; }
-  header h1 {
-    margin: 4px 0 6px; font-weight: 800;
-    font-size: clamp(1.9rem, 6vw, 2.8rem); letter-spacing: .08em;
-    color: var(--pink); text-shadow: 3px 3px 0 var(--yellow);
-  }
-  header p { margin: 0; color: var(--muted); }
-  @keyframes bob { 50% { transform: translateY(-8px) rotate(-3deg); } }
 
   .tabs {
     position: sticky; top: 0; z-index: 10;
@@ -130,121 +121,124 @@
 
   @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 
-  /* 為什麼要學光舞 */
-  .why { max-width: 1100px; margin: 8px auto 4px; padding: 0 16px; }
-  .why-head { text-align: center; margin-bottom: 18px; }
-  .why-head h2 {
-    display: inline-block; margin: 0 0 6px; padding: 6px 26px; font-size: clamp(1.3rem, 4.5vw, 1.8rem);
-    background: var(--yellow); border: 3px solid var(--text); border-radius: 999px; box-shadow: 0 4px 0 var(--text);
-    transform: rotate(-1.5deg);
-  }
-  .why-head p { margin: 8px 0 0; color: var(--muted); }
-  .why-grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
-  @media (min-width: 640px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (min-width: 960px) { .why-grid { grid-template-columns: repeat(6, 1fr); }
-    .why-item { grid-column: span 2; } .why-item:nth-child(4) { grid-column: 2 / span 2; } .why-item:nth-child(5) { grid-column: 4 / span 2; } }
-  .why-item {
-    position: relative; background: #fff; border: 3px solid var(--text); border-radius: 26px;
-    padding: 34px 18px 16px; box-shadow: var(--shadow); transition: transform .15s;
-  }
-  .why-item:hover { transform: translateY(-4px) rotate(.6deg); }
-  .why-item:nth-child(1) { --c: var(--pink); } .why-item:nth-child(2) { --c: var(--sky); }
-  .why-item:nth-child(3) { --c: var(--mint); } .why-item:nth-child(4) { --c: var(--purple); }
-  .why-item:nth-child(5) { --c: #f5a623; }
-  .why-ico {
-    position: absolute; top: -22px; left: 16px; width: 52px; height: 52px; display: grid; place-items: center;
-    font-size: 1.6rem; background: var(--c); border: 3px solid var(--text); border-radius: 50%; box-shadow: 0 3px 0 var(--text);
-  }
-  .why-item h3 { margin: 0 0 2px; font-size: 1.08rem; }
-  .why-item .tag { display: inline-block; margin-bottom: 6px; padding: 0 10px; border-radius: 999px; background: var(--c); color: #fff; font-size: .78rem; font-weight: 800; }
-  .why-item p { margin: 0; font-size: .95rem; }
-  .why-note { margin: 14px auto 0; max-width: 720px; text-align: center; font-size: .8rem; color: var(--muted); }
+  /* ===== Landing Page ===== */
+  .section { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
 
-  /* 首頁 Hero */
-  .hero { max-width: 860px; margin: 0 auto; padding: 34px 16px 6px; text-align: center; }
+  /* Hero */
+  .hero { text-align: center; padding: clamp(36px, 8vw, 72px) 16px 28px; max-width: 820px; margin: 0 auto; }
   .hero .deco { font-size: 2rem; letter-spacing: .4em; display: inline-block; animation: bob 2.4s ease-in-out infinite; }
   .hero h1 {
-    margin: 6px 0 12px; font-weight: 800; line-height: 1.3;
-    font-size: clamp(1.9rem, 7vw, 3rem); letter-spacing: .06em;
+    margin: 8px 0 12px; font-weight: 800; line-height: 1.25;
+    font-size: clamp(2.2rem, 9vw, 3.8rem); letter-spacing: .05em;
     color: var(--pink); text-shadow: 3px 3px 0 var(--yellow);
   }
-  .hero .ask { font-size: clamp(1.05rem, 3.4vw, 1.3rem); font-weight: 600; margin: 0 0 10px; }
-  .hero .lead { margin: 0 auto; max-width: 680px; background: #fff; border: 3px solid var(--text); border-radius: 26px; padding: 16px 22px; box-shadow: var(--shadow); text-align: left; }
-  .hero .lead mark { background: linear-gradient(transparent 55%, var(--yellow) 55%); color: inherit; padding: 0 2px; }
-  .hero .sub { margin: 10px 0 0; color: var(--muted); font-size: .9rem; }
-  .safe {
-    position: relative; margin: 26px auto 6px; max-width: 760px; text-align: left;
-    background: #e9fbf3; border: 3px solid var(--mint); border-radius: 26px; padding: 20px 22px 16px 86px;
+  .hero .ask { margin: 0 0 8px; font-size: clamp(1.05rem, 3.6vw, 1.3rem); font-weight: 600; }
+  .hero .lead { margin: 0 auto 22px; max-width: 600px; color: var(--muted); }
+  .hero .lead mark { background: linear-gradient(transparent 55%, var(--yellow) 55%); color: var(--text); padding: 0 2px; }
+  .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .cta {
+    display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+    font: inherit; font-weight: 800; font-size: 1.1rem; color: var(--text);
+    padding: 14px 30px; border-radius: 999px; background: var(--yellow);
+    border: 3px solid var(--text); box-shadow: 0 6px 0 var(--text);
+    transition: transform .12s, box-shadow .12s;
   }
-  .safe .badge {
-    position: absolute; left: 16px; top: 50%; transform: translateY(-50%) rotate(-6deg);
-    width: 56px; height: 56px; display: grid; place-items: center; font-size: 1.8rem;
-    background: #fff; border: 3px solid var(--mint); border-radius: 50%;
+  .cta:hover { transform: translateY(-2px); box-shadow: 0 8px 0 var(--text); }
+  .cta:active { transform: translateY(4px); box-shadow: 0 2px 0 var(--text); }
+  .cta:focus-visible { outline: 4px solid var(--sky); outline-offset: 4px; }
+  .cta .arrow { display: inline-block; animation: bob 1.6s ease-in-out infinite; }
+  .cta.ghost { background: #fff; box-shadow: 0 6px 0 var(--text); font-weight: 600; font-size: 1rem; }
+  .safe-pill {
+    display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; padding: 8px 18px;
+    background: #e9fbf3; border: 2px solid var(--mint); border-radius: 999px; font-size: .92rem;
   }
-  .safe h2 { margin: 0 0 4px; font-size: 1.15rem; color: #1f8f6b; }
-  .safe p { margin: 0; }
-  @media (max-width: 480px) { .safe { padding: 62px 18px 16px; } .safe .badge { left: 50%; top: 4px; transform: translate(-50%, -50%) rotate(-6deg); } }
+  .safe-pill b { color: #1f8f6b; }
+  @keyframes bob { 50% { transform: translateY(-6px); } }
 
-  /* 孩子在玩什麼 */
-  .play { max-width: 1100px; margin: 36px auto 8px; padding: 0 16px; }
-  .play-intro { max-width: 680px; margin: 0 auto 18px; text-align: center; }
-  .play-intro p { margin: 6px 0 0; color: var(--muted); font-size: .92rem; }
-  .play-grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
-  @media (min-width: 640px) { .play-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (min-width: 960px) { .play-grid { grid-template-columns: repeat(4, 1fr); } }
-  .play-item { background: #fff; border: 3px solid var(--text); border-radius: 26px; padding: 18px; box-shadow: var(--shadow); text-align: center; transition: transform .15s; }
-  .play-item:hover { transform: translateY(-4px) rotate(-.8deg); }
-  .play-item .pi { font-size: 2.2rem; line-height: 1.2; }
-  .play-item h3 { margin: 4px 0 6px; font-size: 1.05rem; }
-  .play-item p { margin: 0; font-size: .92rem; text-align: left; }
-  .courses-title { text-align: center; margin: 34px 0 0; font-size: clamp(1.2rem, 4vw, 1.6rem); }
+  /* Section heading */
+  .sec-head { text-align: center; margin: 40px 0 18px; }
+  .sec-head h2 {
+    display: inline-block; margin: 0; padding: 6px 26px; font-size: clamp(1.25rem, 4.4vw, 1.7rem);
+    background: var(--yellow); border: 3px solid var(--text); border-radius: 999px; box-shadow: 0 4px 0 var(--text);
+    transform: rotate(-1.2deg);
+  }
+  .sec-head p { margin: 10px 0 0; color: var(--muted); font-size: .92rem; }
+
+  /* 5 理由：三欄小卡片 */
+  .card-grid { display: grid; gap: 14px; grid-template-columns: 1fr; }
+  @media (min-width: 560px) { .card-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 900px) {
+    .card-grid { grid-template-columns: repeat(6, 1fr); }
+    .card-grid > * { grid-column: span 2; }
+    .card-grid.five > :nth-child(4) { grid-column: 2 / span 2; }
+    .card-grid.five > :nth-child(5) { grid-column: 4 / span 2; }
+  }
+  .mini {
+    background: #fff; border: 3px solid var(--text); border-radius: 22px; padding: 16px 16px 14px;
+    box-shadow: 0 5px 0 rgba(90,70,54,.14); transition: transform .15s;
+  }
+  .mini:hover { transform: translateY(-4px) rotate(.5deg); }
+  .mini:nth-child(5n+1) { --c: var(--pink); } .mini:nth-child(5n+2) { --c: var(--sky); }
+  .mini:nth-child(5n+3) { --c: var(--mint); } .mini:nth-child(5n+4) { --c: var(--purple); }
+  .mini:nth-child(5n+5) { --c: #f5a623; }
+  .mini .em {
+    display: grid; place-items: center; width: 46px; height: 46px; font-size: 1.5rem;
+    background: var(--c); border: 3px solid var(--text); border-radius: 50%; margin-bottom: 8px;
+  }
+  .mini h3 { margin: 0 0 4px; font-size: 1.02rem; }
+  .mini p { margin: 0; font-size: .9rem; color: #6b5744; line-height: 1.6; }
+  .note { margin: 14px auto 0; max-width: 720px; text-align: center; font-size: .78rem; color: var(--muted); }
+
+  /* 玩什麼：精簡四卡 */
+  .card-grid.four { grid-template-columns: repeat(2, 1fr); }
+  @media (min-width: 900px) { .card-grid.four { grid-template-columns: repeat(4, 1fr); } .card-grid.four > * { grid-column: auto; } }
+  .card-grid.four .mini { text-align: center; padding: 14px 12px; }
+  .card-grid.four .mini .em { margin: 0 auto 6px; background: #fff7d6; }
+  .card-grid.four .mini p { font-size: .85rem; }
+  @media (max-width: 420px) { .card-grid.four { grid-template-columns: 1fr; } }
+
+  /* 課程區 */
+  #courses { scroll-margin-top: 8px; }
+  .courses-title { text-align: center; margin: 44px 0 0; font-size: clamp(1.3rem, 4.5vw, 1.8rem); }
 </style>
 </head>
 <body>
 
 <header class="hero">
   <span class="deco" aria-hidden="true">🌟🎈✨</span>
-  <h1>讓孩子揮出<br>人生第一道光 ✨</h1>
-  <p class="ask">您的孩子，是那種聽到音樂就忍不住擺動的孩子嗎？ 🎵</p>
-  <p class="lead">與其壓抑活力，不如給這份活力一個舞台。<mark>「光舞」</mark>是近年最吸睛的表演藝術，台大電機之夜每年最受矚目的壓軸節目就是光舞。現在，這門連大學生都著迷的技藝，我們<mark>首次為國小學童量身打造</mark>。</p>
-  <p class="sub">國小 24 週課程 ・ 家長版</p>
-
-  <div class="safe">
-    <div class="badge" aria-hidden="true">🛡️</div>
-    <h2>不用火、不用電線，安心玩光舞</h2>
-    <p>光舞道具採用 <strong>LED 冷光棒</strong>，不點火、沒有灼燙風險，是「火舞」的安全版本。孩子玩得開心，家長學校都放心。 🌈</p>
+  <h1>讓孩子揮出<br>人生第一道光</h1>
+  <p class="ask">您的孩子，是聽到音樂就忍不住擺動的孩子嗎？ 🎵</p>
+  <p class="lead">與其壓抑活力，不如給它一個舞台。<mark>光舞</mark>是近年最吸睛的表演藝術，現在，我們<mark>首次為國小學童量身打造</mark>。</p>
+  <div class="cta-row">
+    <a class="cta" href="#courses">快速查看課綱 <span class="arrow" aria-hidden="true">👇</span></a>
+    <a class="cta ghost" href="#why">為什麼學光舞？</a>
   </div>
+  <div class="safe-pill">🛡️ <span><b>不用火、不用電線</b>，LED 冷光棒安心玩</span></div>
 </header>
 
-<section class="why" aria-labelledby="why-title">
-  <div class="why-head">
-    <h2 id="why-title">💡 為什麼該讓孩子學光舞？</h2>
-    <p>五個研究給我們的理由 🌱</p>
+<section class="section" id="why" aria-labelledby="why-title">
+  <div class="sec-head"><h2 id="why-title">💡 為什麼該讓孩子學光舞？</h2><p>五個研究給我們的理由 🌱</p></div>
+  <div class="card-grid five">
+    <article class="mini"><div class="em" aria-hidden="true">🧠</div><h3>大腦的高階訓練</h3><p>一手畫圓、一手畫線的不對稱揮舞，把握 7–10 歲「雙手獨立協調」的黃金發展期。</p></article>
+    <article class="mini"><div class="em" aria-hidden="true">🎯</div><h3>在快樂中練專注</h3><p>研究指出，結合節奏與空間感的協調性運動，有助於提升專注力與執行功能。</p></article>
+    <article class="mini"><div class="em" aria-hidden="true">✋</div><h3>動手也動腦</h3><p>握棍、控制光軌的精細動作，鍛鍊手部小肌肉，與整體學習表現有高度正向關聯。</p></article>
+    <article class="mini"><div class="em" aria-hidden="true">✨</div><h3>刺激大腦神經網絡</h3><p>全新的 LED 實體道具技能，給視覺與動作控制區全新的刺激與成長。</p></article>
+    <article class="mini"><div class="em" aria-hidden="true">🤸</div><h3>全面提升動作能力</h3><p>國際研究顯示，馬戲道具類課程有助於提升空間知覺、身體控制與平衡感。</p></article>
   </div>
-  <div class="why-grid">
-    <article class="why-item"><div class="why-ico" aria-hidden="true">🧠</div><span class="tag">雙手獨立</span><h3>大腦的高階訓練</h3><p>一手畫圓、一手畫線，光舞的不對稱揮舞，正好把握 7–10 歲大腦建立「雙手獨立協調」的黃金發展期。</p></article>
-    <article class="why-item"><div class="why-ico" aria-hidden="true">🎯</div><span class="tag">節奏 × 空間</span><h3>在快樂中練專注</h3><p>研究指出，結合節奏與空間感的「協調性運動」，有助於提升孩子的專注力與執行功能。</p></article>
-    <article class="why-item"><div class="why-ico" aria-hidden="true">✋</div><span class="tag">精細動作</span><h3>動手也動腦</h3><p>握棍、控制光軌的精細動作，同時鍛鍊手部小肌肉，與整體學習表現有高度正向關聯。</p></article>
-    <article class="why-item"><div class="why-ico" aria-hidden="true">✨</div><span class="tag">全新挑戰</span><h3>刺激大腦神經網絡</h3><p>學習全新的 LED 實體道具技能，能給予大腦視覺與動作控制區全新的刺激與成長。</p></article>
-    <article class="why-item"><div class="why-ico" aria-hidden="true">🤸</div><span class="tag">空間 × 平衡</span><h3>全面提升動作能力</h3><p>國際研究顯示，馬戲道具類課程有助於同步提升孩子的空間知覺、身體控制與平衡感。</p></article>
-  </div>
-  <p class="why-note">＊以上為肢體與學習發展的一般性研究觀點，說明的是正向關聯與啟發，不代表治療效果，也不保證學業成績；實際成效因孩子個別差異而異。</p>
+  <p class="note">＊以上為肢體與學習發展的一般性研究觀點，說明的是正向關聯與啟發，不代表治療效果，也不保證學業成績；實際成效因孩子個別差異而異。</p>
 </section>
 
-<section class="play" aria-labelledby="play-title">
-  <div class="play-intro">
-    <div class="why-head" style="margin-bottom:6px"><h2 id="play-title">🎮 課程裡，孩子每天都在玩什麼？</h2></div>
-    <p><strong style="color:var(--text)">我們不排枯燥的操練，每一堂課都像一場探險！</strong><br>前期先不拿道具，透過身體遊戲建立安全的空間界線，再循序漸進導入 LED 道具。 🧭</p>
-  </div>
-  <div class="play-grid">
-    <article class="play-item"><div class="pi">🚦</div><h3>燈光指令遊戲</h3><p>老師變換燈色，孩子即時反應——綠燈走、紅燈定格，專注力在笑聲中養成。</p></article>
-    <article class="play-item"><div class="pi">🗿</div><h3>魔法雕像</h3><p>音樂停下的瞬間，用道具擺出指定造型，練身體控制也練創意。</p></article>
-    <article class="play-item"><div class="pi">🌤️</div><h3>氣象播報</h3><p>太陽是慢畫大圓，龍捲風是原地旋轉，讓孩子學會控制速度與力道。</p></article>
-    <article class="play-item"><div class="pi">🎉</div><h3>無壓力光影同樂會</h3><p>捨棄高壓的期末展演，期末以趣味挑戰與光影派對作結，建立孩子的成就感與自信心。</p></article>
+<section class="section" aria-labelledby="play-title">
+  <div class="sec-head"><h2 id="play-title">🎮 孩子每天都在玩什麼？</h2><p>不排枯燥操練，每堂都像一場探險！前期先不拿道具，用身體遊戲建立安全界線，再循序導入 LED 道具。 🧭</p></div>
+  <div class="card-grid four">
+    <article class="mini"><div class="em" aria-hidden="true">🚦</div><h3>燈光指令遊戲</h3><p>綠燈走、紅燈定格，專注力在笑聲中養成。</p></article>
+    <article class="mini"><div class="em" aria-hidden="true">🗿</div><h3>魔法雕像</h3><p>音樂一停，用道具擺出指定造型。</p></article>
+    <article class="mini"><div class="em" aria-hidden="true">🌤️</div><h3>氣象播報</h3><p>太陽慢畫大圓、龍捲風原地旋轉，學會控制速度與力道。</p></article>
+    <article class="mini"><div class="em" aria-hidden="true">🎉</div><h3>光影同樂會</h3><p>期末不高壓展演，以趣味挑戰與光影派對作結。</p></article>
   </div>
 </section>
 
-<h2 class="courses-title">📅 24 週課程內容</h2>
+<h2 class="courses-title" id="courses">📅 24 週課程內容</h2>
 
 <nav class="tabs" role="tablist" aria-label="年級切換" id="tabs"></nav>
 
