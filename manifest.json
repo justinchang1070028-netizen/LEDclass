@@ -1,0 +1,18 @@
+{
+  "name": "LED 光舞課程教案（授課老師版）",
+  "short_name": "LED 光舞",
+  "description": "LED 光舞 24 週課程授課老師版教案，可離線瀏覽。",
+  "id": "./teacher.html",
+  "start_url": "./teacher.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "lang": "zh-Hant",
+  "background_color": "#0b1020",
+  "theme_color": "#0b1020",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

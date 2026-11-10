@@ -3,7 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>LED 光舞課程教案</title>
+<title>LED 光舞課程教案｜授課老師版</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0b1020">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="LED 光舞">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <style>
   :root {
     --bg: #0b1020;
@@ -175,6 +184,42 @@
     .overlay { position: static; visibility: visible; opacity: 1; background: none; }
     .modal { box-shadow: none; border-color: #999; }
   }
+
+  /* ===== 老師版新增 ===== */
+  body { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+  .modal { max-width: 1000px; }
+  .steps-layout { display: grid; gap: 16px; grid-template-columns: 1fr; align-items: start; }
+  @media (min-width: 860px) {
+    .steps-layout { grid-template-columns: minmax(0, 1fr) minmax(300px, 380px); }
+    .video-box { position: sticky; top: 12px; }
+  }
+  .video-box {
+    border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+    background: #060a18;
+  }
+  .video-box h5 { margin: 0; padding: 8px 12px; font-size: .85rem; color: var(--accent); border-bottom: 1px solid var(--line); }
+  .video-frame { position: relative; aspect-ratio: 16 / 9; background: #000; }
+  .video-frame video { width: 100%; height: 100%; display: block; background: #000; }
+  .video-ph {
+    position: absolute; inset: 0; display: none; flex-direction: column;
+    align-items: center; justify-content: center; gap: 4px; text-align: center;
+    padding: 12px; color: var(--muted); font-size: .85rem;
+    background: repeating-linear-gradient(45deg, #0a1128, #0a1128 12px, #0d1633 12px, #0d1633 24px);
+  }
+  .video-ph b { color: var(--text); font-size: 1rem; }
+  .video-ph code { color: var(--warm); font-size: .78rem; word-break: break-all; }
+  .video-frame.missing video { visibility: hidden; }
+  .video-frame.missing .video-ph { display: flex; }
+  .toolbar { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; padding: 0 16px 8px; align-items: center; }
+  .btn {
+    cursor: pointer; font: inherit; font-size: .88rem; color: var(--text);
+    background: var(--bg-2); border: 1px solid var(--line); border-radius: 999px; padding: 6px 16px;
+  }
+  .btn:hover:not(:disabled) { border-color: var(--accent); }
+  .btn:disabled { opacity: .5; cursor: default; }
+  #net-status { font-size: .8rem; color: var(--muted); }
+  #net-status.offline { color: var(--warm); }
+  @media print { body * { display: none !important; } body::before { content: "本教案僅供授課老師於 App 內瀏覽，不提供列印。"; display: block; padding: 2rem; } }
 </style>
 </head>
 <body>
@@ -183,6 +228,11 @@
   <h1>LED 光舞課程教案</h1>
   <p>國小 24 週課程 ・ 家長版與授課老師版雙版本</p>
 </header>
+
+<div class="toolbar">
+  <button class="btn" id="btn-cache" type="button" hidden>📥 離線儲存示範影片</button>
+  <span id="net-status" role="status"></span>
+</div>
 
 <nav class="tabs" role="tablist" aria-label="年級切換" id="tabs"></nav>
 
@@ -2175,6 +2225,35 @@ function field(h, value) {
   return f;
 }
 
+/* 影片路徑規則：videos/<年級>-w<兩位週次>.mp4，例如 videos/low-w01.mp4。
+   也可在某週資料加上 video: "自訂路徑.mp4" 覆蓋預設。 */
+function videoPath(w) {
+  return w.video || ("videos/" + currentGrade + "-w" + String(w.week).padStart(2, "0") + ".mp4");
+}
+
+function videoBlock(w) {
+  const src = videoPath(w);
+  const box = el("aside", "video-box");
+  box.appendChild(el("h5", null, "🎬 動作示範影片"));
+  const frame = el("div", "video-frame");
+  const v = document.createElement("video");
+  v.controls = true; v.preload = "none"; v.playsInline = true;
+  v.setAttribute("controlslist", "nodownload noremoteplayback");
+  v.setAttribute("disablepictureinpicture", "");
+  v.addEventListener("contextmenu", (e) => e.preventDefault());
+  const source = document.createElement("source");
+  source.src = src; source.type = "video/mp4";
+  v.appendChild(source);
+  const ph = el("div", "video-ph");
+  ph.append(el("b", null, "影片尚未上傳"), document.createTextNode("請將示範影片放在："), el("code", null, src));
+  const markMissing = () => frame.classList.add("missing");
+  source.addEventListener("error", markMissing);
+  v.addEventListener("error", markMissing);
+  frame.append(v, ph);
+  box.appendChild(frame);
+  return box;
+}
+
 function openModal(w) {
   lastFocus = document.activeElement;
   $("m-week").textContent = "第 " + w.week + " 週";
@@ -2194,6 +2273,8 @@ function openModal(w) {
   teacher.appendChild(field("課室安全管理", t.safety));
 
   teacher.appendChild(el("h4", null, "分解教學與口語引導"));
+  const layout = el("div", "steps-layout");
+  const stepsCol = el("div");
   if (t.steps && t.steps.length) {
     const ol = el("ol");
     t.steps.forEach((s) => {
@@ -2202,10 +2283,12 @@ function openModal(w) {
       if (s.say) li.appendChild(el("span", "say", "引導口語：" + s.say));
       ol.appendChild(li);
     });
-    teacher.appendChild(ol);
+    stepsCol.appendChild(ol);
   } else {
-    teacher.appendChild(el("p", "empty", "內容待補充"));
+    stepsCol.appendChild(el("p", "empty", "內容待補充"));
   }
+  layout.append(stepsCol, videoBlock(w));
+  teacher.appendChild(layout);
   teacher.appendChild(field("難易度與常規設定", t.levels));
 
   body.append(parent, teacher);
@@ -2233,6 +2316,42 @@ document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal
 renderTabs();
 updateTabs();
 renderGrid();
+
+/* ===== PWA：Service Worker 註冊、網路狀態、離線儲存影片 ===== */
+document.addEventListener("contextmenu", (e) => e.preventDefault());
+
+function allVideoUrls() {
+  const urls = [];
+  gradeOrder.forEach((g) => lessonData[g].weeks.forEach((w) =>
+    urls.push(w.video || ("videos/" + g + "-w" + String(w.week).padStart(2, "0") + ".mp4"))));
+  return urls;
+}
+
+function updateNet() {
+  const n = $("net-status");
+  n.textContent = navigator.onLine ? "🟢 線上" : "🟠 離線模式（已儲存內容可正常瀏覽）";
+  n.classList.toggle("offline", !navigator.onLine);
+}
+window.addEventListener("online", updateNet);
+window.addEventListener("offline", updateNet);
+updateNet();
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js").then(() => navigator.serviceWorker.ready).then((reg) => {
+    const btn = $("btn-cache");
+    btn.hidden = false;
+    btn.addEventListener("click", () => {
+      btn.disabled = true; btn.textContent = "儲存中…";
+      (reg.active || navigator.serviceWorker.controller).postMessage({ type: "CACHE_VIDEOS", urls: allVideoUrls() });
+    });
+    navigator.serviceWorker.addEventListener("message", (e) => {
+      if (e.data && e.data.type === "CACHE_VIDEOS_DONE") {
+        btn.disabled = false;
+        btn.textContent = "📥 離線儲存示範影片（已儲存 " + e.data.saved + " 支）";
+      }
+    });
+  }).catch((err) => console.warn("SW 註冊失敗", err));
+}
 </script>
 </body>
 </html>
