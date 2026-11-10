@@ -1,5 +1,5 @@
 /* LED 光舞教案 Service Worker：離線快取 + 影片 Range 支援 */
-const VERSION = "v2";
+const VERSION = "v3";
 const SHELL_CACHE = "led-shell-" + VERSION;
 const VIDEO_CACHE = "led-video-v1"; // 影片快取不隨版本清除，避免重新下載大檔
 const SHELL = [
@@ -75,8 +75,11 @@ self.addEventListener("fetch", (e) => {
   if (req.mode === "navigate") {
     e.respondWith(
       fetch(req).then((res) => {
-        const copy = res.clone();
-        caches.open(SHELL_CACHE).then((c) => c.put("./teacher.html", copy));
+        // 只快取成功的 teacher.html，避免 404 等錯誤頁蓋掉離線版本
+        if (res.ok && new URL(req.url).pathname.endsWith("/teacher.html")) {
+          const copy = res.clone();
+          caches.open(SHELL_CACHE).then((c) => c.put("./teacher.html", copy));
+        }
         return res;
       }).catch(() => caches.match("./teacher.html"))
     );

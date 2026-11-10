@@ -6,6 +6,14 @@
 <title>LED 光舞課程教案｜授課老師版</title>
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#0b1020">
+<script>
+/* 在畫面繪製前套用主題，避免閃白；預設為深色 */
+(function () {
+  var t = "dark";
+  try { t = localStorage.getItem("theme") || "dark"; } catch (e) {}
+  document.documentElement.setAttribute("data-theme", t === "light" ? "light" : "dark");
+})();
+</script>
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
@@ -26,6 +34,31 @@
     --accent-2: #ff6bd6;
     --warm: #ffcf6b;
     --glow: 0 0 18px rgba(92, 240, 255, .35);
+    --tabs-bg: rgba(11,16,32,.85);
+    --tab-on-text: #061018;
+    --say-text: #ffd6f3;
+    --overlay-bg: rgba(4,7,18,.72);
+    --shadow-modal: 0 20px 60px rgba(0,0,0,.5);
+    color-scheme: dark;
+  }
+  :root[data-theme="light"] {
+    --bg: #f3f6ff;
+    --bg-2: #ffffff;
+    --card: #ffffff;
+    --card-hover: #eef3ff;
+    --text: #1a2340;
+    --muted: #5a6788;
+    --line: #cdd7ef;
+    --accent: #0a7ea4;
+    --accent-2: #b3157f;
+    --warm: #a86a00;
+    --glow: 0 4px 14px rgba(10, 126, 164, .22);
+    --tabs-bg: rgba(243,246,255,.9);
+    --tab-on-text: #ffffff;
+    --say-text: #7a0d57;
+    --overlay-bg: rgba(40,52,90,.45);
+    --shadow-modal: 0 20px 50px rgba(30,45,90,.25);
+    color-scheme: light;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -57,7 +90,7 @@
     position: sticky; top: 0; z-index: 10;
     display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;
     padding: 14px 16px;
-    background: linear-gradient(var(--bg), rgba(11,16,32,.85));
+    background: linear-gradient(var(--bg), var(--tabs-bg));
     backdrop-filter: blur(8px);
   }
   .tab {
@@ -71,8 +104,8 @@
   }
   .tab:hover { color: var(--text); border-color: var(--accent); }
   .tab[aria-selected="true"] {
-    color: #061018;
-    background: linear-gradient(90deg, var(--accent), #9af7ff);
+    color: var(--tab-on-text);
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
     border-color: transparent;
     box-shadow: var(--glow);
   }
@@ -127,7 +160,7 @@
     position: fixed; inset: 0; z-index: 100;
     display: flex; align-items: flex-start; justify-content: center;
     padding: 4vh 12px;
-    background: rgba(4,7,18,.72); backdrop-filter: blur(4px);
+    background: var(--overlay-bg); backdrop-filter: blur(4px);
     opacity: 0; visibility: hidden; transition: opacity .22s, visibility .22s;
     overflow-y: auto;
   }
@@ -136,7 +169,7 @@
     width: 100%; max-width: 760px;
     background: var(--bg-2);
     border: 1px solid var(--line); border-radius: 18px;
-    box-shadow: 0 20px 60px rgba(0,0,0,.5), var(--glow);
+    box-shadow: var(--shadow-modal), var(--glow);
     transform: translateY(18px) scale(.98); transition: transform .22s;
     position: relative; margin-bottom: 4vh;
   }
@@ -169,7 +202,7 @@
   .say {
     display: block; margin-top: 2px; padding: 6px 10px;
     border-left: 3px solid var(--accent-2);
-    background: rgba(255,107,214,.08); border-radius: 0 8px 8px 0; color: #ffd6f3;
+    background: rgba(255,107,214,.08); border-radius: 0 8px 8px 0; color: var(--say-text);
   }
   .empty { color: var(--muted); font-style: italic; }
 
@@ -208,14 +241,29 @@
   .video-frame video { width: 100%; height: 100%; display: block; background: #000; }
   .video-ph {
     position: absolute; inset: 0; display: none; flex-direction: column;
-    align-items: center; justify-content: center; gap: 4px; text-align: center;
-    padding: 12px; color: var(--muted); font-size: .85rem;
-    background: repeating-linear-gradient(45deg, #0a1128, #0a1128 12px, #0d1633 12px, #0d1633 24px);
+    align-items: center; justify-content: center; gap: 6px; text-align: center;
+    padding: 14px; color: #9aa6c8; font-size: .85rem;
+    background:
+      radial-gradient(circle at 50% 38%, rgba(92,240,255,.16), transparent 55%),
+      repeating-linear-gradient(45deg, #0a1128, #0a1128 14px, #0d1633 14px, #0d1633 28px);
+    border: 1px dashed rgba(92,240,255,.35); border-radius: 4px;
   }
-  .video-ph b { color: var(--text); font-size: 1rem; }
-  .video-ph code { color: var(--warm); font-size: .78rem; word-break: break-all; }
-  .video-frame.missing video { visibility: hidden; }
+  .video-ph .ph-ico {
+    width: 54px; height: 54px; display: grid; place-items: center; font-size: 1.5rem;
+    border-radius: 50%; border: 2px solid rgba(92,240,255,.6); color: #5cf0ff;
+    box-shadow: 0 0 18px rgba(92,240,255,.35);
+  }
+  .video-ph b { color: #e8ecf8; font-size: 1rem; }
+  .video-ph code { color: #ffcf6b; font-size: .74rem; word-break: break-all; }
+  .video-frame.missing video { display: none; }
   .video-frame.missing .video-ph { display: flex; }
+  .tablist { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+  .theme-btn {
+    cursor: pointer; font: inherit; font-weight: 600; color: var(--text);
+    background: var(--bg-2); border: 1px solid var(--line); border-radius: 999px;
+    padding: 10px 16px; transition: .2s; white-space: nowrap;
+  }
+  .theme-btn:hover, .theme-btn:focus-visible { border-color: var(--accent); box-shadow: var(--glow); }
   .toolbar { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; padding: 0 16px 8px; align-items: center; }
   .btn {
     cursor: pointer; font: inherit; font-size: .88rem; color: var(--text);
@@ -240,7 +288,10 @@
   <span id="net-status" role="status"></span>
 </div>
 
-<nav class="tabs" role="tablist" aria-label="年級切換" id="tabs"></nav>
+<div class="tabs">
+  <div class="tablist" role="tablist" aria-label="年級切換" id="tabs"></div>
+  <button class="theme-btn" id="theme-toggle" type="button" aria-label="切換深色或淺色模式"></button>
+</div>
 
 <main>
   <div class="focus" id="focus"></div>
@@ -3263,26 +3314,49 @@ function videoPath(w) {
   return w.video || ("videos/" + currentGrade + "-w" + String(w.week).padStart(2, "0") + ".mp4");
 }
 
+/* 檢查影片是否存在：先看離線快取，再用 HEAD 請求；存在才載入 <video>，否則維持佔位圖框。
+   （preload="none" 的 <video> 不會主動觸發載入，所以不能只靠 error 事件判斷。） */
+async function videoExists(src) {
+  try {
+    if ("caches" in window && (await caches.match(src, { ignoreSearch: true }))) return true;
+  } catch (_) {}
+  try {
+    const res = await fetch(src, { method: "HEAD", cache: "no-store" });
+    const type = res.headers.get("content-type") || "";
+    return res.ok && /^(video|application\/octet-stream)/i.test(type);
+  } catch (_) {
+    return false;
+  }
+}
+
 function videoBlock(w) {
   const src = videoPath(w);
   const box = el("aside", "video-box");
   box.appendChild(el("h5", null, "🎬 動作示範影片"));
-  const frame = el("div", "video-frame");
-  const v = document.createElement("video");
-  v.controls = true; v.preload = "none"; v.playsInline = true;
-  v.setAttribute("controlslist", "nodownload noremoteplayback");
-  v.setAttribute("disablepictureinpicture", "");
-  v.addEventListener("contextmenu", (e) => e.preventDefault());
-  const source = document.createElement("source");
-  source.src = src; source.type = "video/mp4";
-  v.appendChild(source);
+  const frame = el("div", "video-frame missing");
+
   const ph = el("div", "video-ph");
-  ph.append(el("b", null, "影片尚未上傳"), document.createTextNode("請將示範影片放在："), el("code", null, src));
-  const markMissing = () => frame.classList.add("missing");
-  source.addEventListener("error", markMissing);
-  v.addEventListener("error", markMissing);
-  frame.append(v, ph);
+  ph.append(
+    el("div", "ph-ico", "▶"),
+    el("b", null, "示範影片準備中"),
+    el("span", null, "影片上傳後會自動出現在這裡"),
+    el("code", null, src)
+  );
+  frame.appendChild(ph);
   box.appendChild(frame);
+
+  videoExists(src).then((ok) => {
+    if (!ok) return;
+    const v = document.createElement("video");
+    v.controls = true; v.preload = "metadata"; v.playsInline = true;
+    v.setAttribute("controlslist", "nodownload noremoteplayback");
+    v.setAttribute("disablepictureinpicture", "");
+    v.addEventListener("contextmenu", (e) => e.preventDefault());
+    v.addEventListener("error", () => { v.remove(); frame.classList.add("missing"); });
+    v.src = src;
+    frame.insertBefore(v, ph);
+    frame.classList.remove("missing");
+  });
   return box;
 }
 
@@ -3366,6 +3440,19 @@ document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal
 renderTabs();
 updateTabs();
 renderGrid();
+
+/* ===== 深色 / 淺色模式 ===== */
+function applyTheme(t) {
+  document.documentElement.setAttribute("data-theme", t);
+  const dark = t === "dark";
+  $("theme-toggle").textContent = dark ? "☀️ 淺色模式" : "🌙 深色模式";
+  const m = document.querySelector('meta[name="theme-color"]');
+  if (m) m.setAttribute("content", dark ? "#0b1020" : "#f3f6ff");
+  try { localStorage.setItem("theme", t); } catch (_) {}
+}
+applyTheme(document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark");
+$("theme-toggle").addEventListener("click", () =>
+  applyTheme(document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light"));
 
 /* ===== PWA：Service Worker 註冊、網路狀態、離線儲存影片 ===== */
 document.addEventListener("contextmenu", (e) => e.preventDefault());
