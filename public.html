@@ -129,6 +129,36 @@
   footer { text-align: center; color: var(--muted); font-size: .88rem; padding: 0 16px 32px; }
 
   @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+  /* 為什麼要學光舞 */
+  .why { max-width: 1100px; margin: 8px auto 4px; padding: 0 16px; }
+  .why-head { text-align: center; margin-bottom: 18px; }
+  .why-head h2 {
+    display: inline-block; margin: 0 0 6px; padding: 6px 26px; font-size: clamp(1.3rem, 4.5vw, 1.8rem);
+    background: var(--yellow); border: 3px solid var(--text); border-radius: 999px; box-shadow: 0 4px 0 var(--text);
+    transform: rotate(-1.5deg);
+  }
+  .why-head p { margin: 8px 0 0; color: var(--muted); }
+  .why-grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
+  @media (min-width: 640px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 960px) { .why-grid { grid-template-columns: repeat(6, 1fr); }
+    .why-item { grid-column: span 2; } .why-item:nth-child(4) { grid-column: 2 / span 2; } .why-item:nth-child(5) { grid-column: 4 / span 2; } }
+  .why-item {
+    position: relative; background: #fff; border: 3px solid var(--text); border-radius: 26px;
+    padding: 34px 18px 16px; box-shadow: var(--shadow); transition: transform .15s;
+  }
+  .why-item:hover { transform: translateY(-4px) rotate(.6deg); }
+  .why-item:nth-child(1) { --c: var(--pink); } .why-item:nth-child(2) { --c: var(--sky); }
+  .why-item:nth-child(3) { --c: var(--mint); } .why-item:nth-child(4) { --c: var(--purple); }
+  .why-item:nth-child(5) { --c: #f5a623; }
+  .why-ico {
+    position: absolute; top: -22px; left: 16px; width: 52px; height: 52px; display: grid; place-items: center;
+    font-size: 1.6rem; background: var(--c); border: 3px solid var(--text); border-radius: 50%; box-shadow: 0 3px 0 var(--text);
+  }
+  .why-item h3 { margin: 0 0 2px; font-size: 1.08rem; }
+  .why-item .tag { display: inline-block; margin-bottom: 6px; padding: 0 10px; border-radius: 999px; background: var(--c); color: #fff; font-size: .78rem; font-weight: 800; }
+  .why-item p { margin: 0; font-size: .95rem; }
+  .why-note { margin: 14px auto 0; max-width: 720px; text-align: center; font-size: .8rem; color: var(--muted); }
 </style>
 </head>
 <body>
@@ -138,6 +168,21 @@
   <h1>LED 光舞小教室</h1>
   <p>國小 24 週課程 ・ 家長版</p>
 </header>
+
+<section class="why" aria-labelledby="why-title">
+  <div class="why-head">
+    <h2 id="why-title">💡 為什麼要學光舞？</h2>
+    <p>五個讓孩子「玩著玩著就長大」的理由 🌱</p>
+  </div>
+  <div class="why-grid">
+    <article class="why-item"><div class="why-ico" aria-hidden="true">🧠</div><span class="tag">雙手不對稱</span><h3>左右腦一起動起來</h3><p>一手畫圓、一手畫線，雙手各做不同的事，能啟發左右腦協同合作。7–10 歲正是大腦發展的黃金期，在遊戲中練習剛剛好！</p></article>
+    <article class="why-item"><div class="why-ico" aria-hidden="true">🎯</div><span class="tag">節奏 × 空間</span><h3>專注力與執行力小幫手</h3><p>結合空間覺察與節奏協調的律動，有助於促進孩子的專注力，也練習「聽指令、做計畫、完成它」的執行力。</p></article>
+    <article class="why-item"><div class="why-ico" aria-hidden="true">✋</div><span class="tag">精細動作</span><h3>小手巧，學習力也跟著好</h3><p>操作道具需要細膩的手眼協調。研究指出，精細動作的發展與整體學習表現之間存在正向關聯。</p></article>
+    <article class="why-item"><div class="why-ico" aria-hidden="true">✨</div><span class="tag">全新挑戰</span><h3>替大腦開啟新線路</h3><p>學習全新的實體道具技能，對大腦是一種新鮮的刺激，有助於促進神經網絡的連結與活化。</p></article>
+    <article class="why-item"><div class="why-ico" aria-hidden="true">🤸</div><span class="tag">全面動作</span><h3>空間感與平衡感升級</h3><p>相較於一般體育課，馬戲道具類的訓練對空間知覺與平衡感的提升更有幫助，讓孩子動得更穩、更協調。</p></article>
+  </div>
+  <p class="why-note">＊以上內容為肢體與學習發展的一般性研究觀點，僅說明正向關聯與啟發，不代表治療效果，也不保證學業成績；實際成效因孩子個別差異而異。</p>
+</section>
 
 <nav class="tabs" role="tablist" aria-label="年級切換" id="tabs"></nav>
 
