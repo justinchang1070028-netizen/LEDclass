@@ -1,5 +1,5 @@
 /* LED 光舞教案 Service Worker：離線快取 + 影片 Range 支援 */
-const VERSION = "v1";
+const VERSION = "v2";
 const SHELL_CACHE = "led-shell-" + VERSION;
 const VIDEO_CACHE = "led-video-v1"; // 影片快取不隨版本清除，避免重新下載大檔
 const SHELL = [
