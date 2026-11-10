@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>LED 光舞課程｜家長版</title>
+<title>讓孩子揮出人生第一道光｜LED 光舞課程家長版</title>
 <meta name="description" content="LED 光舞 24 週課程家長版：每週教學目標與課程理念。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -159,30 +159,92 @@
   .why-item .tag { display: inline-block; margin-bottom: 6px; padding: 0 10px; border-radius: 999px; background: var(--c); color: #fff; font-size: .78rem; font-weight: 800; }
   .why-item p { margin: 0; font-size: .95rem; }
   .why-note { margin: 14px auto 0; max-width: 720px; text-align: center; font-size: .8rem; color: var(--muted); }
+
+  /* 首頁 Hero */
+  .hero { max-width: 860px; margin: 0 auto; padding: 34px 16px 6px; text-align: center; }
+  .hero .deco { font-size: 2rem; letter-spacing: .4em; display: inline-block; animation: bob 2.4s ease-in-out infinite; }
+  .hero h1 {
+    margin: 6px 0 12px; font-weight: 800; line-height: 1.3;
+    font-size: clamp(1.9rem, 7vw, 3rem); letter-spacing: .06em;
+    color: var(--pink); text-shadow: 3px 3px 0 var(--yellow);
+  }
+  .hero .ask { font-size: clamp(1.05rem, 3.4vw, 1.3rem); font-weight: 600; margin: 0 0 10px; }
+  .hero .lead { margin: 0 auto; max-width: 680px; background: #fff; border: 3px solid var(--text); border-radius: 26px; padding: 16px 22px; box-shadow: var(--shadow); text-align: left; }
+  .hero .lead mark { background: linear-gradient(transparent 55%, var(--yellow) 55%); color: inherit; padding: 0 2px; }
+  .hero .sub { margin: 10px 0 0; color: var(--muted); font-size: .9rem; }
+  .safe {
+    position: relative; margin: 26px auto 6px; max-width: 760px; text-align: left;
+    background: #e9fbf3; border: 3px solid var(--mint); border-radius: 26px; padding: 20px 22px 16px 86px;
+  }
+  .safe .badge {
+    position: absolute; left: 16px; top: 50%; transform: translateY(-50%) rotate(-6deg);
+    width: 56px; height: 56px; display: grid; place-items: center; font-size: 1.8rem;
+    background: #fff; border: 3px solid var(--mint); border-radius: 50%;
+  }
+  .safe h2 { margin: 0 0 4px; font-size: 1.15rem; color: #1f8f6b; }
+  .safe p { margin: 0; }
+  @media (max-width: 480px) { .safe { padding: 62px 18px 16px; } .safe .badge { left: 50%; top: 4px; transform: translate(-50%, -50%) rotate(-6deg); } }
+
+  /* 孩子在玩什麼 */
+  .play { max-width: 1100px; margin: 36px auto 8px; padding: 0 16px; }
+  .play-intro { max-width: 680px; margin: 0 auto 18px; text-align: center; }
+  .play-intro p { margin: 6px 0 0; color: var(--muted); font-size: .92rem; }
+  .play-grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
+  @media (min-width: 640px) { .play-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 960px) { .play-grid { grid-template-columns: repeat(4, 1fr); } }
+  .play-item { background: #fff; border: 3px solid var(--text); border-radius: 26px; padding: 18px; box-shadow: var(--shadow); text-align: center; transition: transform .15s; }
+  .play-item:hover { transform: translateY(-4px) rotate(-.8deg); }
+  .play-item .pi { font-size: 2.2rem; line-height: 1.2; }
+  .play-item h3 { margin: 4px 0 6px; font-size: 1.05rem; }
+  .play-item p { margin: 0; font-size: .92rem; text-align: left; }
+  .courses-title { text-align: center; margin: 34px 0 0; font-size: clamp(1.2rem, 4vw, 1.6rem); }
 </style>
 </head>
 <body>
 
-<header>
+<header class="hero">
   <span class="deco" aria-hidden="true">🌟🎈✨</span>
-  <h1>LED 光舞小教室</h1>
-  <p>國小 24 週課程 ・ 家長版</p>
+  <h1>讓孩子揮出<br>人生第一道光 ✨</h1>
+  <p class="ask">您的孩子，是那種聽到音樂就忍不住擺動的孩子嗎？ 🎵</p>
+  <p class="lead">與其壓抑活力，不如給這份活力一個舞台。<mark>「光舞」</mark>是近年最吸睛的表演藝術，台大電機之夜每年最受矚目的壓軸節目就是光舞。現在，這門連大學生都著迷的技藝，我們<mark>首次為國小學童量身打造</mark>。</p>
+  <p class="sub">國小 24 週課程 ・ 家長版</p>
+
+  <div class="safe">
+    <div class="badge" aria-hidden="true">🛡️</div>
+    <h2>不用火、不用電線，安心玩光舞</h2>
+    <p>光舞道具採用 <strong>LED 冷光棒</strong>，不點火、沒有灼燙風險，是「火舞」的安全版本。孩子玩得開心，家長學校都放心。 🌈</p>
+  </div>
 </header>
 
 <section class="why" aria-labelledby="why-title">
   <div class="why-head">
-    <h2 id="why-title">💡 為什麼要學光舞？</h2>
-    <p>五個讓孩子「玩著玩著就長大」的理由 🌱</p>
+    <h2 id="why-title">💡 為什麼該讓孩子學光舞？</h2>
+    <p>五個研究給我們的理由 🌱</p>
   </div>
   <div class="why-grid">
-    <article class="why-item"><div class="why-ico" aria-hidden="true">🧠</div><span class="tag">雙手不對稱</span><h3>左右腦一起動起來</h3><p>一手畫圓、一手畫線，雙手各做不同的事，能啟發左右腦協同合作。7–10 歲正是大腦發展的黃金期，在遊戲中練習剛剛好！</p></article>
-    <article class="why-item"><div class="why-ico" aria-hidden="true">🎯</div><span class="tag">節奏 × 空間</span><h3>專注力與執行力小幫手</h3><p>結合空間覺察與節奏協調的律動，有助於促進孩子的專注力，也練習「聽指令、做計畫、完成它」的執行力。</p></article>
-    <article class="why-item"><div class="why-ico" aria-hidden="true">✋</div><span class="tag">精細動作</span><h3>小手巧，學習力也跟著好</h3><p>操作道具需要細膩的手眼協調。研究指出，精細動作的發展與整體學習表現之間存在正向關聯。</p></article>
-    <article class="why-item"><div class="why-ico" aria-hidden="true">✨</div><span class="tag">全新挑戰</span><h3>替大腦開啟新線路</h3><p>學習全新的實體道具技能，對大腦是一種新鮮的刺激，有助於促進神經網絡的連結與活化。</p></article>
-    <article class="why-item"><div class="why-ico" aria-hidden="true">🤸</div><span class="tag">全面動作</span><h3>空間感與平衡感升級</h3><p>相較於一般體育課，馬戲道具類的訓練對空間知覺與平衡感的提升更有幫助，讓孩子動得更穩、更協調。</p></article>
+    <article class="why-item"><div class="why-ico" aria-hidden="true">🧠</div><span class="tag">雙手獨立</span><h3>大腦的高階訓練</h3><p>一手畫圓、一手畫線，光舞的不對稱揮舞，正好把握 7–10 歲大腦建立「雙手獨立協調」的黃金發展期。</p></article>
+    <article class="why-item"><div class="why-ico" aria-hidden="true">🎯</div><span class="tag">節奏 × 空間</span><h3>在快樂中練專注</h3><p>研究指出，結合節奏與空間感的「協調性運動」，有助於提升孩子的專注力與執行功能。</p></article>
+    <article class="why-item"><div class="why-ico" aria-hidden="true">✋</div><span class="tag">精細動作</span><h3>動手也動腦</h3><p>握棍、控制光軌的精細動作，同時鍛鍊手部小肌肉，與整體學習表現有高度正向關聯。</p></article>
+    <article class="why-item"><div class="why-ico" aria-hidden="true">✨</div><span class="tag">全新挑戰</span><h3>刺激大腦神經網絡</h3><p>學習全新的 LED 實體道具技能，能給予大腦視覺與動作控制區全新的刺激與成長。</p></article>
+    <article class="why-item"><div class="why-ico" aria-hidden="true">🤸</div><span class="tag">空間 × 平衡</span><h3>全面提升動作能力</h3><p>國際研究顯示，馬戲道具類課程有助於同步提升孩子的空間知覺、身體控制與平衡感。</p></article>
   </div>
-  <p class="why-note">＊以上內容為肢體與學習發展的一般性研究觀點，僅說明正向關聯與啟發，不代表治療效果，也不保證學業成績；實際成效因孩子個別差異而異。</p>
+  <p class="why-note">＊以上為肢體與學習發展的一般性研究觀點，說明的是正向關聯與啟發，不代表治療效果，也不保證學業成績；實際成效因孩子個別差異而異。</p>
 </section>
+
+<section class="play" aria-labelledby="play-title">
+  <div class="play-intro">
+    <div class="why-head" style="margin-bottom:6px"><h2 id="play-title">🎮 課程裡，孩子每天都在玩什麼？</h2></div>
+    <p><strong style="color:var(--text)">我們不排枯燥的操練，每一堂課都像一場探險！</strong><br>前期先不拿道具，透過身體遊戲建立安全的空間界線，再循序漸進導入 LED 道具。 🧭</p>
+  </div>
+  <div class="play-grid">
+    <article class="play-item"><div class="pi">🚦</div><h3>燈光指令遊戲</h3><p>老師變換燈色，孩子即時反應——綠燈走、紅燈定格，專注力在笑聲中養成。</p></article>
+    <article class="play-item"><div class="pi">🗿</div><h3>魔法雕像</h3><p>音樂停下的瞬間，用道具擺出指定造型，練身體控制也練創意。</p></article>
+    <article class="play-item"><div class="pi">🌤️</div><h3>氣象播報</h3><p>太陽是慢畫大圓，龍捲風是原地旋轉，讓孩子學會控制速度與力道。</p></article>
+    <article class="play-item"><div class="pi">🎉</div><h3>無壓力光影同樂會</h3><p>捨棄高壓的期末展演，期末以趣味挑戰與光影派對作結，建立孩子的成就感與自信心。</p></article>
+  </div>
+</section>
+
+<h2 class="courses-title">📅 24 週課程內容</h2>
 
 <nav class="tabs" role="tablist" aria-label="年級切換" id="tabs"></nav>
 
