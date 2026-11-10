@@ -4005,6 +4005,22 @@ const gameLibrary = {
   "光之引導者": "一人閉眼，另一人用道具輕敲地板的聲音引導方向。"
 };
 
+/* 第 1-4 週一律不拿道具：這四週顯示「徒手版」標準玩法 */
+const gameLibraryNoProp = {
+  "燈光指令紅綠燈": "老師亮燈大家走，燈一滅瞬間定格。",
+  "魔法雕像木頭人": "音樂停時，必須擺出指定的身體姿勢（如：高舉雙手、單腳站立）。",
+  "船長的命令": "聽指令做動作，例如「護盾開啟（雙手交叉）」、「回到自己的家」、「靠邊停」。",
+  "氣象播報": "老師喊「龍捲風」就快速轉動身體，「微風」就慢動作輕輕搖晃。",
+  "鏡子遊戲": "兩人一組，一人當照鏡子的人，完全模仿對方身體動作的軌跡。",
+  "光影接龍": "圍成圓圈，一人做一個動作，下一人要重複前一人的動作並加上自己的。",
+  "尋寶探險": "想像手中有手電筒，跟著老師的指引探索教室空間。",
+  "能量傳遞": "學生圍圈，用手掌輕碰旁邊同學的手掌，把「能量」傳遞下去。",
+  "軌跡畫布": "用手臂在空中畫出巨大的幾何圖形或數字，讓同學猜。",
+  "節奏打擊": "配合音樂重拍，用腳踏地或拍手打節拍。",
+  "障礙穿越": "想像地上有紅外線，保持身體平穩、不碰線通過。",
+  "光之引導者": "一人閉眼，另一人用拍手或輕敲地板的聲音引導方向。"
+};
+
 const gradeOrder = ["low", "mid", "high"];
 let currentGrade = "low";
 let lastFocus = null;
@@ -4125,10 +4141,10 @@ function videoBlock(w) {
   return box;
 }
 
-function gameItem(g, isMain) {
+function gameItem(g, isMain, week) {
   const li = el("li");
   li.appendChild(el("strong", null, (isMain ? "⭐ " : "🎮 ") + g.name));
-  const base = gameLibrary[g.name];
+  const base = (week <= 4 ? gameLibraryNoProp : gameLibrary)[g.name];
   if (base) li.appendChild(el("span", "g-base", "標準玩法：" + base));
   if (g.tip) li.appendChild(el("span", "g-tip", (isMain ? "本週變體：" : "本週應用：") + g.tip));
   return li;
@@ -4150,7 +4166,7 @@ function overviewPanel(w) {
   const v2 = el("span", "ov-v");
   if (mains.length) {
     const ul = el("ul", "games");
-    mains.forEach((g) => ul.appendChild(gameItem(g, true)));
+    mains.forEach((g) => ul.appendChild(gameItem(g, true, w.week)));
     v2.appendChild(ul);
   } else v2.textContent = "內容待補充";
   r2.appendChild(v2);
@@ -4204,7 +4220,7 @@ function openModal(w) {
   if (extras.length) {
     teacher.appendChild(el("h4", null, "延伸遊戲（時間充裕時使用）"));
     const ul = el("ul", "games");
-    extras.forEach((g) => ul.appendChild(gameItem(g, false)));
+    extras.forEach((g) => ul.appendChild(gameItem(g, false, w.week)));
     teacher.appendChild(ul);
   }
   teacher.appendChild(field("難易度與常規設定", t.levels));

@@ -166,10 +166,11 @@
 
   /* 5 理由：三欄小卡片 */
   .card-grid { display: grid; gap: 14px; grid-template-columns: 1fr; }
-  @media (min-width: 560px) { .card-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (min-width: 900px) {
-    .card-grid { grid-template-columns: repeat(6, 1fr); }
-    .card-grid > * { grid-column: span 2; }
+  @media (min-width: 560px) { .card-grid:not(.five) { grid-template-columns: repeat(2, 1fr); } }
+  /* 五大理由：手機單欄、平板與電腦 3 欄並排（3+2，第二排置中） */
+  @media (min-width: 640px) {
+    .card-grid.five { grid-template-columns: repeat(6, 1fr); }
+    .card-grid.five > * { grid-column: span 2; }
     .card-grid.five > :nth-child(4) { grid-column: 2 / span 2; }
     .card-grid.five > :nth-child(5) { grid-column: 4 / span 2; }
   }
